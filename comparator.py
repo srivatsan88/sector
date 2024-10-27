@@ -1,9 +1,9 @@
 import json
 import math
-from posixpath import split
 import nltk
 from nltk.metrics import edit_distance
-from sector_helper import lemmatize, replace_with_synonyms, generate_ngrams, filter_content_words, jaccard_similarity, lemmatize_dynamic
+from sector_helper import lemmatize, replace_with_synonyms, generate_ngrams, filter_content_words, jaccard_similarity, lemmatize_dynamic, get_synonyms, stop_words, key_input_coverage
+from fuzzywuzzy import fuzz
 
 def jaccard_content_word_similarity(input_text, reference_text):
     """Calculate Jaccard similarity based on content words (nouns, verbs, adjectives)."""
@@ -24,9 +24,6 @@ def jaccard_content_word_similarity(input_text, reference_text):
     content_input = set(filter_content_words(lemmatized_input))
     content_reference = set(filter_content_words(lemmatized_ref))
 
-    #print(content_input)
-    #print(content_reference)
-
     return jaccard_similarity(content_input, content_reference)
 
 def ngram_fuzzy_match_score(input_text, reference_text, n=2):
@@ -39,6 +36,7 @@ def ngram_fuzzy_match_score(input_text, reference_text, n=2):
 
     input_ngrams = set(generate_ngrams(lemmatized_input, n))
     reference_ngrams = set(generate_ngrams(lemmatized_ref, n))
+
 
     matched_ngrams = input_ngrams.intersection(reference_ngrams)
 
@@ -101,12 +99,14 @@ def geometric_mean_top_n(scores, top_n):
 
 def compare_sentences_flexible(input_text, reference_text, top_n=3):
     """Compare input and reference sentences using flexible semantic similarity methods and compute geometric mean."""
+    
     # Calculate individual scores
     content_word_score = jaccard_content_word_similarity(input_text, reference_text)
     ngram_score = ngram_fuzzy_match_score(input_text, reference_text, n=2)  # Bi-gram fuzzy match
     levenshtein_score = levenshtein_similarity(input_text, reference_text)
     pos_alignment_score = pos_based_alignment(input_text, reference_text)
-    coverage_score = input_coverage(input_text, reference_text)
+    overall_coverage_score = input_coverage(input_text, reference_text)
+    key_coverage_score = key_input_coverage(input_text, reference_text)
 
     # List of all scores for geometric mean
     scores = [
@@ -114,7 +114,8 @@ def compare_sentences_flexible(input_text, reference_text, top_n=3):
         ngram_score,
         levenshtein_score,
         pos_alignment_score,
-        coverage_score
+        overall_coverage_score,
+        key_coverage_score
     ]
 
     # Compute geometric mean of top N scores
@@ -129,7 +130,8 @@ def compare_sentences_flexible(input_text, reference_text, top_n=3):
             "ngram_fuzzy_match_score": ngram_score,
             "levenshtein_similarity": levenshtein_score,
             "pos_based_alignment_score": pos_alignment_score,
-            "word_coverage": coverage_score,
+            "word_coverage": overall_coverage_score,
+            "key_word_coverage": key_coverage_score,
             "geometric_mean_top_n": geometric_mean_score
         }
     }

@@ -89,11 +89,13 @@ Alright, have a great day!
 final_score = run_sector(
     input_text1,
     reference_doc1,
-    max_window_size=3,  # Combine consecutive sentences if needed
+    max_window_size=4,  # Combine consecutive sentences if needed
     use_semantic=True,  # Set to True for semantic matching or False for simple sliding window
-    combine_threshold=0.995,  # Threshold for combining sentences
+    combine_threshold=0.996,  # Threshold for combining sentences
     top_n_individual=2,
-    top_n_aggregated=2
+    top_n_aggregated=2,
+    debug=False, 
+    search='sequential'
 )
 
 print(json.dumps(final_score, indent=2))

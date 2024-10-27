@@ -85,9 +85,11 @@ if __name__=="__main__":
         similar_sentences_json = extract_similar_sentences(
             reference_doc_list[docs],
             input_text_list[docs],
-            max_window_size=4,  # Combine consecutive sentences if needed
+            max_window_size=3,  # Combine consecutive sentences if needed
             use_semantic=True,  # Set to True for semantic matching or False for simple sliding window
-            combine_threshold=0.996  # Threshold for combining sentences
+            combine_threshold=0.996,  # Threshold for combining sentences
+            debug=False, 
+            search='sequential'
         )
 
         # Output the matched sentences in JSON format

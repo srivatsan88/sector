@@ -6,6 +6,7 @@ from nltk import ngrams
 import re
 import nltk
 from fuzzywuzzy import fuzz
+import numpy as np
 
 
 # Load spaCy model
@@ -98,6 +99,32 @@ def edit_distance_similarity(tokens1, tokens2):
     distance = edit_distance(tokens1, tokens2)
     return 1 - (distance / max(len(tokens1), len(tokens2)))  # Normalize to get a score between 0 and 1
 
+def key_input_coverage(input_text, reference_text):
+    """Calculate how much of the input sentence is covered by the reference sentence based on key words."""
+    lemmatized_input = lemmatize_dynamic(input_text).split()
+    lemmatized_ref = lemmatize_dynamic(reference_text).split()
+
+    lemmatized_input = list(set([token for token in lemmatized_input if token not in stop_words  and len(token) > 3]))
+    lemmatized_ref = list(set([token for token in lemmatized_ref if token not in stop_words and len(token) > 3]))
+
+    match_count = 0
+    for input in lemmatized_input:
+        for reference in lemmatized_ref:
+            similarity = fuzz.ratio(input, reference)
+
+            if similarity > 70:
+                match_count = match_count + 1
+            else:
+
+                inp_synonym = get_synonyms(input)
+                ref_synonym = get_synonyms(reference)
+                if len(inp_synonym & ref_synonym) >=1:
+                    match_count = match_count + 1
+    coverage_score = match_count / len(lemmatized_ref) if lemmatized_input else 0
+
+    return min(coverage_score,1.0)
+
+
 def combine_sentences_simple(sentences, start, window_size):
     """Combine consecutive sentences starting from a specific index."""
     combined = ' '.join(sentences[start:start + window_size])
@@ -107,3 +134,48 @@ def combine_sentences(sentences, combination):
     """Combine sentences based on the selected combination of indices."""
     combined = ' '.join([sentences[i] for i in combination])
     return combined
+
+#function to pick only sequential sentences
+def is_sequential(sentences):
+    return all(sentences[i] + 1 == sentences[i + 1] for i in range(len(sentences)-1))
+
+#Function to get embedding of a sentence
+#currently this uses spacy embedding model
+#To get better extraction accuracy switch to better embedding models or custom models
+
+def get_embedding(sentence):
+    return nlp(" ".join(sentence)).vector.reshape(1, -1)
+
+# Calculating individual statistics
+
+def calculate_statistics(float_values):
+    mean = np.mean(float_values)
+    std_dev = np.std(float_values)
+    min_val = np.min(float_values)
+    max_val = np.max(float_values)
+    percentiles = np.percentile(float_values, [25, 50, 75, 95, 99])
+    
+    # Creating a dictionary to store results
+    summary = {
+        "Mean": mean,
+        "Standard Deviation": std_dev,
+        "Min": min_val,
+        "Max": max_val,
+        "25th Percentile": percentiles[0],
+        "Median (50th Percentile)": percentiles[1],
+        "75th Percentile": percentiles[2],
+        "95th Percentile": percentiles[3],
+        "99th Percentile": percentiles[4]
+    }
+    
+    return summary
+
+def process_text(text, clean_fn=None):
+    if clean_fn is None:
+        clean_fn = clean_text
+    return clean_fn(text)
+
+def embed_process(sentence, embed_fn=None):
+    if embed_fn is None:
+        embed_fn = get_embedding
+    return embed_fn(sentence)

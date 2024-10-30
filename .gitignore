@@ -1,0 +1,21 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+.pytest_cache
+
+# Virtual environments
+senv/
+venv/
+.env/
+
+# Package files
+*.egg-info/
+dist/
+build/
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Environment variables
+*.env

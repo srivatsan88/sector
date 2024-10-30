@@ -78,8 +78,8 @@ def run_sector (input_text, reference_document,  max_window_size=2,  use_semanti
     combined_result = combine_scores(combined_scores, top_n_aggregated)
         
     # Output results for each input-reference pair
-    for result in sentence_results:
-        print(json.dumps(result, indent=2))
+    #for result in sentence_results:
+    #    print(json.dumps(result, indent=2))
 
     # Output combined score result
     #print("\nCombined Scores across all input-reference pairs:")

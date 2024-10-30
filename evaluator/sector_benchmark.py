@@ -6,7 +6,7 @@ from rouge_score import rouge_scorer
 from nltk.translate.meteor_score import meteor_score
 import json
 
-from extractor import extract_similar_sentences
+from sector.extractor import extract_similar_sentences
 
 
 # Function to calculate BLEU score

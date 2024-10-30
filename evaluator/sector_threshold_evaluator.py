@@ -1,8 +1,8 @@
 import numpy as np
 import json
 from sklearn.mixture import GaussianMixture
-from comparator import compare_sentences_flexible
-from extractor import extract_similar_sentences
+from sector.comparator import compare_sentences_flexible
+from sector.extractor import extract_similar_sentences
 
 #Functions for the different threshold determination methods
 def determine_cutoff_with_percentile(geometric_means, percentile=75):

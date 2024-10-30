@@ -1,5 +1,5 @@
-from extractor import extract_similar_sentences
-from sector_helper import calculate_statistics
+from sector.extractor import extract_similar_sentences
+from sector.helpers.sector_helper import calculate_statistics
 import json
 
 # Example reference document and input text

@@ -1,0 +1,6 @@
+spacy==3.8.2
+nltk==3.9.1
+scikit-learn==1.5.2
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.26.0
+rouge-score==0.1.2

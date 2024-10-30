@@ -3,16 +3,8 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 from sector.helpers.sector_helper import clean_text, is_sequential, replace_with_synonyms, lemmatize, lemmatize_dynamic, combine_sentences, combine_sentences_simple, nlp, jaccard_similarity, get_embedding, key_input_coverage, process_text, embed_process
 import itertools
+from sector.utils.logging_config import logger, set_log_level
 
-
-# Load NLP model 
-#nlp = spacy.load('en_core_web_lg')
-
-# def jaccard_similarity(set1, set2):
-#     """Calculate the Jaccard Similarity between two sets."""
-#     intersection = len(set1.intersection(set2))
-#     union = len(set1.union(set2))
-#     return intersection / union
 
 def match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic, combine_threshold, debug, search, embed_fn):
     """Matches an input sentence to a set of reference sentence combinations using both ordered and unordered methods."""
@@ -30,9 +22,9 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
     lemmatized_input = lemmatize_dynamic(input_sentence)
     #lemmatized_input = replace_with_synonyms(lemmatized_input)
 
-    if debug:
-        print(f"\nInput Sentence (Original): {input_sentence}")
-        #print(f"Lemmatized & Normalized Input Sentence: {' '.join(lemmatized_input)}")
+    
+    logger.debug(f"\nInput Sentence (Original): {input_sentence}")
+    #print(f"Lemmatized & Normalized Input Sentence: {' '.join(lemmatized_input)}")
 
     # Try all combinations of sentences from 1 to max_window_size
     for window_size in range(1, max_window_size + 1):
@@ -51,9 +43,9 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
                     #score_ordered = jaccard_similarity(set(lemmatized_ref_ordered.split()), set(lemmatized_input.split()))
                     score_ordered = key_input_coverage(lemmatized_input, lemmatized_ref_ordered)
 
-                if debug:
-                    print(f"Ordered Combination: {ordered_combined}")
-                    print(f"Similarity Score (Ordered): {score_ordered:.5f}")
+                
+                logger.debug(f"Ordered Combination: {ordered_combined}")
+                logger.debug(f"Similarity Score (Ordered): {score_ordered:.5f}")
 
                 if score_ordered > best_score:
                     best_match = ordered_combined
@@ -88,11 +80,9 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
                         #score_unordered = jaccard_similarity(set(lemmatized_ref_unordered.split()), set(lemmatized_input.split()))
                         score_ordered = key_input_coverage(lemmatized_input, lemmatized_ref_unordered)
 
-                    if debug:
-                        print(
-                            f"Unordered Combination: {unordered_combined}")
-                        print(
-                            f"Similarity Score (Unordered): {score_unordered:.5f}")
+                    
+                    logger.debug(f"Unordered Combination: {unordered_combined}")
+                    logger.debug(f"Similarity Score (Unordered): {score_unordered:.5f}")
 
                     if score_unordered > best_score:
                         best_match = unordered_combined
@@ -119,6 +109,9 @@ def extract_similar_sentences(reference_document, input_text, max_window_size=2,
     :param use_semantic: If True, uses semantic similarity, else uses sliding window.
     :return: A list of JSON-like objects containing matching results.
     """
+
+    if debug:
+        set_log_level("debug")
     # Clean the input and reference text
     #reference_document = clean_text(reference_document)
     #input_text = clean_text(input_text)

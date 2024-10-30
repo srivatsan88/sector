@@ -72,19 +72,19 @@ def run_sector (input_text, reference_document,  max_window_size=2,  use_semanti
     )
 
     # Process the list of JSON objects
-    combined_scores, results = process_json_list(similar_sentences_json, top_n_individual)
+    combined_scores, sentence_results = process_json_list(similar_sentences_json, top_n_individual)
 
     # Combine the individual scores into an aggregate result
     combined_result = combine_scores(combined_scores, top_n_aggregated)
         
     # Output results for each input-reference pair
-    for result in results:
+    for result in sentence_results:
         print(json.dumps(result, indent=2))
 
     # Output combined score result
     #print("\nCombined Scores across all input-reference pairs:")
     #print(json.dumps(combined_result, indent=2))
-    return combined_result
+    return sentence_results,combined_result
     
 if __name__ == "__main__":
     # Load the JSON file (simulating loading it from a file)

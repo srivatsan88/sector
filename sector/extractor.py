@@ -78,7 +78,7 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
                             input_vector, ref_vector_unordered).flatten()[0]
                     else:
                         #score_unordered = jaccard_similarity(set(lemmatized_ref_unordered.split()), set(lemmatized_input.split()))
-                        score_ordered = key_input_coverage(lemmatized_input, lemmatized_ref_unordered)
+                        score_unordered = key_input_coverage(lemmatized_input, lemmatized_ref_unordered)
 
                     
                     logger.debug(f"Unordered Combination: {unordered_combined}")

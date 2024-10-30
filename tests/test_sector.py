@@ -28,7 +28,7 @@ reference_doc_list = ["Artificial Intelligence (AI) refers to the simulation of 
 
 for docs in range(len(input_text_list)):
     # Extract similar sentences using either sliding window or semantic comparison
-    final_score = run_sector(
+    match_sentences,final_score = run_sector(
         input_text_list[docs],
         reference_doc_list[docs],
         max_window_size=3,  # Combine consecutive sentences if needed
@@ -42,4 +42,5 @@ for docs in range(len(input_text_list)):
         embed_fn=None
     )
 
+    print(match_sentences)
     print(json.dumps(final_score, indent=2))

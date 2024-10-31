@@ -117,8 +117,9 @@ $$
 C = \sum_{k=1}^{w} \binom{n}{k} \times k! = \sum_{k=1}^{w} \frac{n!}{(n - k)!}
 $$
 
-Based on above details for max_window_size 3 and 5 sentences in context, the search space for sequential is 12, ordered is 25 and random is 85. Larger the search space better is the accuracy at the cost of elevated run time. Let us see in next section on how to balance accuracy and run time based on use case need.
 ---
+
+Based on above details for max_window_size 3 and 5 sentences in context, the search space for sequential is 12, ordered is 25 and random is 85. Larger the search space better is the accuracy at the cost of elevated run time. Let us see in next section on how to balance accuracy and run time based on use case need.
 
 ### Balancing Speed and Accuracy with `max_window_size`, `search`, and `combine_threshold`
 
@@ -146,7 +147,7 @@ The `examples` directory contains sample applications for:
 - **Flask App**: A web API for text matching using Flask.
 - **Standalone Examples**: Scripts demonstrating different Sector functionalities.
 
-##Benchmarking and Evaluation
+## Benchmarking and Evaluation
 
 Evaluating LLM output for accuracy against context is complex due to factors such as prompt variability, use-case diversity, and the inherently flexible nature of language generation. LLMs can produce a wide range of valid responses depending on subtle changes in prompts, making it difficult to standardize evaluation criteria. Different use cases like retrieval-augmented generation (RAG), summarization, question answering, or conversational agents add further complexity, as each scenario has distinct expectations for relevance and detail. For example, RAG requires precise extraction of relevant information, while summarization emphasizes capturing the essence of a larger context. Additionally, the challenge increases when the context is large, as it requires sophisticated methods to identify and align relevant segments of the context with the output. These factors make it essential to use evaluation techniques that consider meaning, context fit, and structural variations to provide a more accurate and meaningful assessment of LLM performance.
 

@@ -1,4 +1,4 @@
-from sector import run_sector
+from sector.sector_main import run_sector
 import json
 
 

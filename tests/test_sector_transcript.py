@@ -86,7 +86,7 @@ Alright, have a great day!
 
 """
 
-final_score = run_sector(
+_,final_score = run_sector(
     input_text1,
     reference_doc1,
     max_window_size=4,  # Combine consecutive sentences if needed

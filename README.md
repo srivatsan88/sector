@@ -7,6 +7,8 @@ Traditional comparison techniques like BLEU, METEOR, and cosine similarity offer
 
 ![Sector Architecture](img/sector.jpg)
 
+Fig: Architecture representing SECTOR components. For more details refer to [Architecture](Architecture.md)
+
 ## Features
 
 - **Context-Aware Matching**: Focuses on the most relevant sections of large contexts, ensuring precise alignment with queries or responses.
@@ -119,7 +121,7 @@ $$
 
 ---
 
-Based on above details for max_window_size 3 and 5 sentences in context, the search space for sequential is 12, ordered is 25 and random is 85. Larger the search space better is the accuracy at the cost of elevated run time. Let us see in next section on how to balance accuracy and run time based on use case need.
+Based on above details for `max_window_size` 3 and 5 `sentences` in context, the search space for sequential is 12, ordered is 25 and random is 85. Larger the search space better is the accuracy at the cost of elevated run time. Let us see in next section on how to balance accuracy and run time based on use case need.
 
 ### Balancing Speed and Accuracy with `max_window_size`, `search`, and `combine_threshold`
 
@@ -152,6 +154,18 @@ The `examples` directory contains sample applications for:
 Evaluating LLM output for accuracy against context is complex due to factors such as prompt variability, use-case diversity, and the inherently flexible nature of language generation. LLMs can produce a wide range of valid responses depending on subtle changes in prompts, making it difficult to standardize evaluation criteria. Different use cases like retrieval-augmented generation (RAG), summarization, question answering, or conversational agents add further complexity, as each scenario has distinct expectations for relevance and detail. For example, RAG requires precise extraction of relevant information, while summarization emphasizes capturing the essence of a larger context. Additionally, the challenge increases when the context is large, as it requires sophisticated methods to identify and align relevant segments of the context with the output. These factors make it essential to use evaluation techniques that consider meaning, context fit, and structural variations to provide a more accurate and meaningful assessment of LLM performance.
 
 To get started quickly, the `evaluator` folder contains sample Python programs designed to assess Sector's suitability for specific use cases and to determine the appropriate threshold levels applicable to each unique scenario. As these thresholds are use-case specific, there are no predefined high or low values; instead, the evaluator helps establish optimal ranges tailored to individual application needs
+
+## Suggestions to Improve Accuracy
+
+To improve accuracy when using Sector, consider the following customizations:
+
+- **Custom Pre-Processing Function**: Implement a pre-processing function specific to your prompts or responses to normalize text variations and improve consistency. Custom fucntion can be added using `clean_fn` parameter.
+- **Advanced or Custom Embedding Models**: Use higher-quality embedding models or custom embeddings tailored to your domain for capturing nuanced language and specific terminology. Custom embedding model can be invoked using `embed_fn` parameter.
+- **Use Case-Specific Comparator Functions**: Choose comparator functions that align best with your use case, such as those emphasizing semantic alignment, factual accuracy, or contextual similarity.
+- **Adjust `max_window_size` and `combine_threshold`**: Tune these parameters to balance search depth and relevance, enhancing accuracy for your specific context.
+  
+These adjustments allow Sector to adapt effectively to diverse requirements, yielding precise, context-aware evaluations.
+
 
 ## Contributing
 

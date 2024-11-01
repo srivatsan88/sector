@@ -29,8 +29,9 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
     # Try all combinations of sentences from 1 to max_window_size
     for window_size in range(1, max_window_size + 1):
         for combination in itertools.combinations(range(len(reference_sentences)), window_size):
-            # Try ordered combinations
-            if (search == 'sequential' and is_sequential(combination)) or search == 'ordered':
+            distance = combination[-1] - combination[0]
+            # Try sequential or ordered combinations
+            if (search == 'sequential' and is_sequential(combination)) or (search == 'ordered' and distance < max_window_size*2):
                 ordered_combined = combine_sentences(reference_sentences, combination)
                 lemmatized_ref_ordered = lemmatize_dynamic(ordered_combined)
                 #lemmatized_ref_ordered = replace_with_synonyms(lemmatized_ref_ordered)

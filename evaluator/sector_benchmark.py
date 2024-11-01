@@ -14,7 +14,7 @@ def calculate_bleu(reference, candidate):
     smoothing_function = SmoothingFunction().method1
     return sentence_bleu([reference.split()], candidate.split(), smoothing_function=smoothing_function)
 
-# Function to calculate GLEU score using sacrebleu
+# Function to calculate GLEU score 
 def calculate_gleu(reference, candidate):
     return sentence_gleu([reference.split()], candidate.split())
 

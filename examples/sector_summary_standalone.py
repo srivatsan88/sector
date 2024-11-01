@@ -91,11 +91,11 @@ matched_sentences,final_score = run_sector(
     reference_doc1,
     max_window_size=3,  # Combine consecutive sentences if needed
     use_semantic=True,  # Set to True for semantic matching or False for simple sliding window
-    combine_threshold=0.999,  # Threshold for combining sentences
+    combine_threshold=0.996,  # Threshold for combining sentences
     top_n_individual=2,
     top_n_aggregated=2,
     debug=False, 
-    search='ordered',
+    search='sequential',
     clean_fn=None,
     embed_fn=None
 )
@@ -120,4 +120,4 @@ response = {
         }
     }
 
-print(response)
+print(json.dumps(response, indent=2))

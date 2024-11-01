@@ -17,7 +17,7 @@ Fig: Architecture representing SECTOR components. For more details refer to [Arc
 - **Configurable Parameters**: Adjustable parameters for sentence matching and scoring thresholds making sector easily adaptable to diverse use cases and diverse scenario like batch and real time scoring.
 - **Efficient Performance on Large Texts**: Optimizes comparisons in high-context scenarios, making it ideal for large documents and complex applications.
 
-## Installation
+## Installation (Refer Note section)
 
 You can install the Sector library via `pip`:
 
@@ -33,8 +33,8 @@ pip install git+https://github.com/srivatsan88/sector.git
 ```
 
 > **Note:** The library requires SpaCy and NLTK for NLP processing. Ensure you have the necessary model by running:
-> You can download the [python file](https://github.com/srivatsan88/sector/raw/main/download_models.py) and run it to download all models
-> If your behind firewall then set proxy or manually download the files from respective project repo and install
+> You can download the [python file - download_models](https://github.com/srivatsan88/sector/raw/main/download_models.py) and run it to download all models
+> If you are behind firewall and access is blocked then set proxy or manually download the files from respective project repo and install
 >
 > ```bash
 > python download_models.py
@@ -195,4 +195,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For further inquiries or support, feel free to open an issue or reach out via LinkedIn ().
+For further inquiries or support, feel free to open an issue or reach out via LinkedIn (https://www.linkedin.com/in/srivatsan-srinivasan-b8131b).

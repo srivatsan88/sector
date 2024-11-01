@@ -5,9 +5,9 @@
 
 Traditional comparison techniques like BLEU, METEOR, and cosine similarity offer useful measures for surface-level similarity between strings but often fall short when comparing LLM responses in scenarios with extensive context and specific responses, such as retrieval-augmented generation (RAG) or concise summaries. Sector takes an engineering-driven approach to address this limitation by first extracting only the most relevant sections of the context, ensuring comparisons are focused on information crucial to the query or summary. This targeted extraction enables a precise alignment between context and response, allowing Sector to deliver a nuanced, context-aware evaluation. By complementing traditional metrics with this engineering-driven methodology, Sector provides a robust and accurate solution for LLM response evaluation in complex, context-rich AI generated content.
 
-![Sector Architecture](img/sector.jpg)
+![Sector Architecture](https://github.com/srivatsan88/sector/raw/main/img/sector.jpg)
 
-Fig: Architecture representing SECTOR components. For more details refer to [Architecture](Architecture.md)
+Fig: Architecture representing SECTOR components. For more details refer to [Architecture](https://github.com/srivatsan88/sector/raw/main/Architecture.md)
 
 ## Features
 
@@ -24,8 +24,17 @@ You can install the Sector library via `pip`:
 ```bash
 pip install sector
 ```
+OR
+
+To install the latest version of **Sector** directly from GitHub, use:
+
+```bash
+pip install git+https://github.com/yourusername/sector.git
+```
 
 > **Note:** The library requires SpaCy and NLTK for NLP processing. Ensure you have the necessary model by running:
+> You can download the [python file](https://github.com/srivatsan88/sector/raw/main/download_models.py) and run it to download all models
+> If your behind firewall then set proxy or manually download the files from respective project repo and install
 >
 > ```bash
 > python download_models.py
@@ -34,6 +43,8 @@ pip install sector
 ## Usage
 
 Here’s a quick example of how to use the Sector library:
+
+For more examples refer to link [Sector Example](https://github.com/srivatsan88/sector/tree/main/examples)
 
 ```python
 from sector.sector_main import run_sector

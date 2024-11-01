@@ -7,7 +7,7 @@ Traditional comparison techniques like BLEU, METEOR, and cosine similarity offer
 
 ![Sector Architecture](https://github.com/srivatsan88/sector/raw/main/img/sector.jpg)
 
-Fig: Architecture representing SECTOR components. For more details refer to [Architecture](https://github.com/srivatsan88/sector/raw/main/Architecture.md)
+Fig: Architecture representing SECTOR components. For more details refer to [Architecture](https://github.com/srivatsan88/sector/blob/main/Architecture.md)
 
 ## Features
 

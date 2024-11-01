@@ -86,7 +86,7 @@ Alright, have a great day!
 
 """
 
-match_sentences,final_score = run_sector(
+matched_sentences,final_score = run_sector(
     input_text1,
     reference_doc1,
     max_window_size=3,  # Combine consecutive sentences if needed
@@ -100,5 +100,24 @@ match_sentences,final_score = run_sector(
     embed_fn=None
 )
 
-print(json.dumps(match_sentences, indent=2))
-print(json.dumps(final_score, indent=2))
+response = {
+    "matched_sentences": [
+        {
+            "input_sentence": match["input_sentence"],
+            "matched_reference": match["matched_reference"]
+        }
+        for match in matched_sentences
+    ],
+    "scores": {
+        "content_word_similarity": final_score["average_scores"]["content_word_similarity"],
+        "ngram_fuzzy_match_score": final_score["average_scores"]["ngram_fuzzy_match_score"],
+        "levenshtein_similarity": final_score["average_scores"]["levenshtein_similarity"],
+        "pos_based_alignment_score": final_score["average_scores"]["pos_based_alignment_score"],
+        "word_coverage": final_score["average_scores"]["word_coverage"],
+        "key_word_coverage": final_score["average_scores"]["key_word_coverage"],
+        "geometric_mean_top_n": final_score["average_scores"]["geometric_mean_top_n"],
+        "overall_geometric_mean": final_score["overall_geometric_mean"]
+        }
+    }
+
+print(response)

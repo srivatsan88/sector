@@ -17,9 +17,9 @@ Fig: Architecture representing SECTOR components. For more details refer to [Arc
 - **Configurable Parameters**: Adjustable parameters for sentence matching and scoring thresholds making sector easily adaptable to diverse use cases and diverse scenario like batch and real time scoring.
 - **Efficient Performance on Large Texts**: Optimizes comparisons in high-context scenarios, making it ideal for large documents and complex applications.
 
-## Installation (Refer Note section)
+## Installation 
 
-You can install the Sector library via `pip`:
+You can install the Sector library via `pip`: (Also, refer to Note section below)
 
 ```bash
 pip install sector

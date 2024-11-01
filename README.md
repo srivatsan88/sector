@@ -29,7 +29,7 @@ OR
 To install the latest version of **Sector** directly from GitHub, use:
 
 ```bash
-pip install git+https://github.com/yourusername/sector.git
+pip install git+https://github.com/srivatsan88/sector.git
 ```
 
 > **Note:** The library requires SpaCy and NLTK for NLP processing. Ensure you have the necessary model by running:

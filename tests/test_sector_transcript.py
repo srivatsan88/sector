@@ -86,7 +86,7 @@ Alright, have a great day!
 
 """
 
-_,final_score = run_sector(
+match_sentences,final_score = run_sector(
     input_text1,
     reference_doc1,
     max_window_size=4,  # Combine consecutive sentences if needed
@@ -98,4 +98,5 @@ _,final_score = run_sector(
     search='sequential'
 )
 
+print(match_sentences)
 print(json.dumps(final_score, indent=2))

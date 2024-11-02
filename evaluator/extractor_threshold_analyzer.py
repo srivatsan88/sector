@@ -34,7 +34,6 @@ for docs in range(len(input_text_list)):
 
     for reference in range(len(reference_doc_list)):
     # Extract similar sentences using either sliding window or semantic comparison
-        print("=================== "+str(reference))
 
         similar_sentences_json = extract_similar_sentences(
             reference_doc_list[reference],

@@ -58,7 +58,7 @@ for docs in range(len(input_text_list)):
             "word_coverage": final_score["average_scores"]["word_coverage"],
             "key_word_coverage": final_score["average_scores"]["key_word_coverage"],
             "geometric_mean_top_n": final_score["average_scores"]["geometric_mean_top_n"],
-            "overall_geometric_mean": final_score["overall_geometric_mean"]
+            "sector_context_similarity": final_score["sector_context_similarity"]
             }
         }
 

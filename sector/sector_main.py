@@ -48,12 +48,12 @@ def combine_scores(combined_scores, top_n=3):
 
     # Calculate geometric mean across all individual geometric mean scores
     geometric_means = [score["geometric_mean_top_n"] for score in combined_scores]
-    overall_geometric_mean = geometric_mean_top_n(geometric_means, top_n)
+    sector_context_similarity = geometric_mean_top_n(geometric_means, top_n)
     
     # Combine average and geometric mean scores
     combined_result = {
         "average_scores": average_scores,
-        "overall_geometric_mean": overall_geometric_mean
+        "sector_context_similarity": sector_context_similarity
     }
 
     return combined_result

@@ -46,5 +46,5 @@ if st.button("Run Sector") and input_text and reference_text:
     for key, value in final_score["average_scores"].items():
         st.write(f"**{key.replace('_', ' ').capitalize()}**: {value}")
     
-    st.write("### Overall Geometric Mean")
-    st.write(final_score["overall_geometric_mean"])
+    st.write("### Sector Context Similarity Score")
+    st.write(final_score["sector_context_similarity"])

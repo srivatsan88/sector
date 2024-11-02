@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response, jsonify
 from sector.sector_main import run_sector
 from sector.helpers.sector_helper import nlp
+import json
 
 app = Flask(__name__)
 
@@ -54,11 +55,11 @@ def match_text():
                 "word_coverage": final_score["average_scores"]["word_coverage"],
                 "key_word_coverage": final_score["average_scores"]["key_word_coverage"],
                 "geometric_mean_top_n": final_score["average_scores"]["geometric_mean_top_n"],
-                "overall_geometric_mean": final_score["overall_geometric_mean"]
+                "sector_context_similarity": final_score["sector_context_similarity"]
             }
         }
         
-        return jsonify(response)
+        return Response(json.dumps(response, sort_keys=False), mimetype='application/json')
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

@@ -4,6 +4,8 @@ from sklearn.mixture import GaussianMixture
 from sector.comparator import compare_sentences_flexible
 from sector.extractor import extract_similar_sentences
 
+#This program generated different statistics. One can use this statistics to derive threshold cut off that fits for ones usecase 
+
 #Functions for the different threshold determination methods
 def determine_cutoff_with_percentile(geometric_means, percentile=75):
     """Use percentiles to determine the cutoff."""

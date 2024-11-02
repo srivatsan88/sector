@@ -40,6 +40,7 @@ if st.button("Run Sector") and input_text and reference_text:
     for sentence in sentence_results:
         st.text("Input Sentence - "+sentence["input_sentence"])
         st.text("Matched Reference - "+sentence["matched_reference"])
+        st.text("Sentence Similarity Score - "+sentence["scores"]["geometric_mean_top_n"])
     
     
     st.write("### Average Scores")

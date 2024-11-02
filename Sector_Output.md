@@ -44,7 +44,7 @@ Below is an example of a typical Sector output, containing sentence-level matche
 
 ## Score Descriptions
 
-| **Score Name**               | **Description**                                                                                                                                                                                                                                  | **Value (Scale 0 - 1)** |
+| **Score Name**               | **Description**                                                                                                                                                                                                                                  | **Value** |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
 | **content_word_similarity**  | Calculates the **Jaccard similarity** between the sets of **content words** (nouns, verbs, adjectives) in the input and reference text. Words are lemmatized and replaced with synonyms for better generalization before comparison. A higher value indicates closer alignment in terms of essential content words. | Scale 0 - 1             |
 | **ngram_fuzzy_match_score**  | Calculates the fuzzy match between n-grams in the input and reference, emphasizing partial phrase matches. This metric captures overlapping patterns in phrasing.                                                                                 | Scale 0 - 1             |

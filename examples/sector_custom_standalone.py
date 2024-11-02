@@ -64,7 +64,8 @@ response = {
     "matched_sentences": [
         {
             "input_sentence": match["input_sentence"],
-            "matched_reference": match["matched_reference"]
+            "matched_reference": match["matched_reference"],
+            "sentence_similarity_score": match["scores"]["geometric_mean_top_n"]
         }
         for match in matched_sentences
     ],

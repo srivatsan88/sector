@@ -70,10 +70,30 @@ matched_sentences, final_score = run_sector(
     embed_fn=None
 )
 
-# Print results
-print("Matched Sentences:", matched_sentences)
-print("Scores:", final_score)
+response = {
+    "matched_sentences": [
+        {
+            "input_sentence": match["input_sentence"],
+            "matched_reference": match["matched_reference"],
+            "sentence_similarity_score": match["scores"]["geometric_mean_top_n"]
+        }
+        for match in matched_sentences
+    ],
+    "scores": {
+        "content_word_similarity": final_score["average_scores"]["content_word_similarity"],
+        "ngram_fuzzy_match_score": final_score["average_scores"]["ngram_fuzzy_match_score"],
+        "levenshtein_similarity": final_score["average_scores"]["levenshtein_similarity"],
+        "pos_based_alignment_score": final_score["average_scores"]["pos_based_alignment_score"],
+        "word_coverage": final_score["average_scores"]["word_coverage"],
+        "key_word_coverage": final_score["average_scores"]["key_word_coverage"],
+        "geometric_mean_top_n": final_score["average_scores"]["geometric_mean_top_n"],
+        "sector_context_similarity": final_score["sector_context_similarity"]
+        }
+    }
+
+print(json.dumps(response, indent=2))
 ```
+For more details on sector output `metrics` refer to [Sector Output](https://github.com/srivatsan88/sector/blob/main/Sector_Output.md)
 
 ## API Reference
 

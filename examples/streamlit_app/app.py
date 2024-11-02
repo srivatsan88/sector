@@ -37,15 +37,37 @@ if st.button("Run Sector") and input_text and reference_text:
         embed_fn=None
     )
 
+
+
+    # Display each sentence result in a styled card layout
     for sentence in sentence_results:
-        st.text("Input Sentence - "+sentence["input_sentence"])
-        st.text("Matched Reference - "+sentence["matched_reference"])
-        st.text("Sentence Similarity Score - "+sentence["scores"]["geometric_mean_top_n"])
-    
-    
-    st.write("### Average Scores")
-    for key, value in final_score["average_scores"].items():
-        st.write(f"**{key.replace('_', ' ').capitalize()}**: {value}")
-    
-    st.write("### Sector Context Similarity Score")
-    st.write(final_score["sector_context_similarity"])
+        with st.container():
+            st.markdown("#### 🔍 Matched Sentence Pair")
+            st.markdown(
+                f"""
+                <div style="padding:10px; background-color:#f9f9f9; border-radius:8px;">
+                    <strong>Input Sentence:</strong> {sentence["input_sentence"]}<br>
+                    <strong>Matched Reference:</strong> {sentence["matched_reference"]}<br>
+                    <strong>Sentence Similarity Score:</strong> {sentence["scores"]["geometric_mean_top_n"]}
+                </div>
+                """, unsafe_allow_html=True
+            )
+            st.write("")  # Adds a bit of spacing
+
+    # Display Average Scores in a more structured format
+    st.markdown("### 📊 Average Scores")
+    cols = st.columns(2)  # Arrange average scores in two columns for better layout
+    for idx, (key, value) in enumerate(final_score["average_scores"].items()):
+        with cols[idx % 2]:  # Alternate columns
+            st.write(f"**{key.replace('_', ' ').capitalize()}**: {value}")
+
+    # Display Sector Context Similarity Score in a separate section with emphasis
+    st.markdown("### 🎯 Sector Context Similarity Score")
+    st.markdown(
+        f"""
+        <div style="padding:10px; background-color:#e0f7fa; border-radius:8px;">
+            <h4 style="color:#00796b;">{final_score["sector_context_similarity"]}</h4>
+        </div>
+        """, unsafe_allow_html=True
+    )
+

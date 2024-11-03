@@ -95,6 +95,12 @@ print(json.dumps(response, indent=2))
 ```
 For more details on sector output `metrics` refer to [Sector Output](https://github.com/srivatsan88/sector/blob/main/Sector_Output.md)
 
+Fastest way to explore `Sector` is via streamlit app provided in examples directory. Download the code and use below command to get started
+
+> ```bash
+> streamlit run examples/streamlit_app/app.py
+> ```
+
 ## API Reference
 
 - **`run_sector(input_text, reference_text, **params)`**
@@ -163,6 +169,10 @@ Sector’s configuration parameters—`max_window_size`, `search`, and `combine_
 - **`search`**: Specifies the sentence arrangement strategy (e.g., "sequential," "ordered," or "random"). Flexible settings like "random" significantly increase the search space by allowing any order of sentences, while restricted settings like "sequential" and "ordered" limit combinations, providing faster but more constrained searches.
 
 - **`combine_threshold`**: Acts as an early stopping criterion based on matching scores. A higher `combine_threshold` requires higher accuracy for matches, causing the search to continue deeper. This improves relevance in content extraction but slows down execution, as more combinations are evaluated.
+
+### Understanding Sector output
+
+For more details on sector output `metrics` refer to [Sector Output](https://github.com/srivatsan88/sector/blob/main/Sector_Output.md)
 
 ### Use Case Patterns
 

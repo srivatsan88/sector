@@ -20,4 +20,6 @@ build/
 # Environment variables
 *.env
 
+#scratchpad local
 notes.txt
+sample.py

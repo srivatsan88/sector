@@ -21,6 +21,7 @@ top_n_individual = st.number_input("Top N Individual Matches", min_value=1, max_
 top_n_aggregated = st.number_input("Top N Aggregated Matches", min_value=1, max_value=5, value=2)
 debug = st.checkbox("Debug Mode", False)
 search = st.selectbox("Search Mode", options=["sequential", "ordered","random"], index=0)
+lexical_algo = st.selectbox("Lexical Algorithm", options=["sentcomp", "keycomp"], index=0)
 comparator = st.selectbox("Comparator Function", options=["Sector", "External","Bring Your Own Metrics"], index=0)
 
 
@@ -38,7 +39,8 @@ if st.button("Run Sector") and input_text and reference_text:
         debug=debug, 
         search=search,
         clean_fn=None,
-        embed_fn=None
+        embed_fn=None,
+        lexical_algo=lexical_algo
     )
 
 

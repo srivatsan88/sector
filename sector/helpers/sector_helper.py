@@ -21,7 +21,7 @@ stop_words = set(stopwords.words('english'))
 
 def clean_text(text):
     """Clean input text by removing special characters but keeping periods and converting newlines to spaces."""
-    text = text.replace("\n", " ")
+    text = text.replace("\n", ".")
     text = re.sub(r'[^A-Za-z0-9\s\.\?\!]+', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text
@@ -104,8 +104,8 @@ def key_input_coverage(input_text, reference_text):
     lemmatized_input = lemmatize_dynamic(input_text).split()
     lemmatized_ref = lemmatize_dynamic(reference_text).split()
 
-    lemmatized_input = list(set([token for token in lemmatized_input if token not in stop_words  and len(token) > 3]))
-    lemmatized_ref = list(set([token for token in lemmatized_ref if token not in stop_words and len(token) > 3]))
+    lemmatized_input = list(set([token for token in lemmatized_input if token not in stop_words  and len(token) >= 3]))
+    lemmatized_ref = list(set([token for token in lemmatized_ref if token not in stop_words and len(token) >= 3]))
 
     match_count = 0
     for input in lemmatized_input:

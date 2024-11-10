@@ -6,7 +6,7 @@ import itertools
 from sector.utils.logging_config import logger, set_log_level
 
 
-def match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic, combine_threshold, debug, search, embed_fn):
+def match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic, combine_threshold, debug, search, embed_fn, lexical_algo):
     """Matches an input sentence to a set of reference sentence combinations using both ordered and unordered methods."""
     best_match = None
     best_score = 0
@@ -41,8 +41,10 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
                     ref_vector_ordered = embed_process(lemmatized_ref_ordered, embed_fn=embed_fn)
                     score_ordered = cosine_similarity(input_vector, ref_vector_ordered).flatten()[0]
                 else:
-                    #score_ordered = jaccard_similarity(set(lemmatized_ref_ordered.split()), set(lemmatized_input.split()))
-                    score_ordered = key_input_coverage(lemmatized_input, lemmatized_ref_ordered)
+                    if lexical_algo is None or lexical_algo == 'sentcomp':
+                        score_ordered = jaccard_similarity(set(lemmatized_ref_ordered.split()), set(lemmatized_input.split()))
+                    else:
+                        score_ordered = key_input_coverage(lemmatized_input, lemmatized_ref_ordered)
 
                 
                 logger.debug(f"Ordered Combination: {ordered_combined}")
@@ -78,8 +80,10 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
                         score_unordered = cosine_similarity(
                             input_vector, ref_vector_unordered).flatten()[0]
                     else:
-                        #score_unordered = jaccard_similarity(set(lemmatized_ref_unordered.split()), set(lemmatized_input.split()))
-                        score_unordered = key_input_coverage(lemmatized_input, lemmatized_ref_unordered)
+                        if lexical_algo is None or lexical_algo == 'sentcomp':
+                            score_unordered = jaccard_similarity(set(lemmatized_ref_unordered.split()), set(lemmatized_input.split()))
+                        else:
+                            score_unordered = key_input_coverage(lemmatized_input, lemmatized_ref_unordered)
 
                     
                     logger.debug(f"Unordered Combination: {unordered_combined}")
@@ -100,7 +104,7 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
     return match_data
 
 
-def extract_similar_sentences(reference_document, input_text, max_window_size=2, use_semantic=False, combine_threshold=0.6, debug=False, search='sequential', clean_fn=None, embed_fn=None):
+def extract_similar_sentences(reference_document, input_text, max_window_size=2, use_semantic=False, combine_threshold=0.6, debug=False, search='sequential', clean_fn=None, embed_fn=None, lexical_algo=None):
     """
     Extracts the most relevant sentences from the reference document by matching each input sentence to all combinations of reference sentences.
     
@@ -131,7 +135,7 @@ def extract_similar_sentences(reference_document, input_text, max_window_size=2,
 
     # Match input sentences to reference sentence combinations
     for input_sentence in input_sentences:
-        result = match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic,combine_threshold, debug, search, embed_fn)
+        result = match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic,combine_threshold, debug, search, embed_fn, lexical_algo)
         matched_sentences.append(result)
 
     return matched_sentences

@@ -136,7 +136,8 @@ def extract_similar_sentences(reference_document, input_text, max_window_size=2,
     # Match input sentences to reference sentence combinations
     for input_sentence in input_sentences:
         result = match_sentence(input_sentence, reference_sentences, max_window_size, use_semantic,combine_threshold, debug, search, embed_fn, lexical_algo)
-        matched_sentences.append(result)
+        if result['best_match'] is not None:
+            matched_sentences.append(result)
 
     return matched_sentences
 

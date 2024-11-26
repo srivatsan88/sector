@@ -16,6 +16,7 @@ build/
 # IDE and editor files
 .vscode/
 .idea/
+.DS_Store
 
 # Environment variables
 *.env
@@ -23,3 +24,4 @@ build/
 #scratchpad local
 notes.txt
 sample.py
+*.csv

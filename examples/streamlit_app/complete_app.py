@@ -6,6 +6,7 @@ from sklearn.mixture import GaussianMixture
 from sector.comparator import compare_sentences_flexible
 from sector.extractor import extract_similar_sentences
 from sector.helpers.sector_helper import calculate_statistics
+from sector.helpers.external_metrics import get_scores_as_json
 from sector.sector_main import run_sector
 from st_aggrid import AgGrid, GridOptionsBuilder
 import json
@@ -148,7 +149,7 @@ if uploaded_file:
 
 
     # Create three tabs
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Run SECTOR", "SECTOR Threshold Evaluator", "Combine Threshold Evaluator","Detailed Analysis","Auto SECTOR"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Run SECTOR", "SECTOR Threshold Evaluator", "Combine Threshold Evaluator","Detailed Analysis","Auto SECTOR","Benchmark"])
 
     # Tab 1: Run SECTOR with AgGrid
     with tab1:
@@ -650,3 +651,118 @@ if uploaded_file:
                 file_name="hyperparameter_search_results.csv",
                 mime="text/csv"
             )
+   # Tab 6: Benchmarking sector with external metrics
+    with tab6:
+        st.header("Benchmarking Sector")
+
+        if st.button("Run Benchmark"):
+            input_text_list = data[input_column].tolist()
+            reference_doc_list = data[reference_column].tolist()
+
+            for docs in range(len(input_text_list)):
+                combined_scores = []
+
+                score_sums = {
+                    "BLEU": 0.0,
+                    "GLEU": 0.0,
+                    "ROUGE-1": 0.0,
+                    "ROUGE-2": 0.0,
+                    "ROUGE-L": 0.0,
+                    "METEOR": 0.0
+                }  
+
+                similar_sentences_json = extract_similar_sentences(
+                    reference_doc_list[docs],
+                    input_text_list[docs],
+                    max_window_size=4,
+                    use_semantic=use_semantic,
+                    combine_threshold=combine_threshold,
+                    debug=False,
+                    search=search_algorithm.lower(),
+                    lexical_algo=lexical_algo.lower()
+                )
+
+                score_json_nosector = get_scores_as_json(reference_doc_list[docs], input_text_list[docs])
+
+                # Output the matched sentences in JSON format
+                for sentence in similar_sentences_json:
+                    input_sentence = sentence['input_sentence']
+                    reference_sentence = sentence['best_match']
+
+                    scores_json_sector = get_scores_as_json(reference_sentence, input_sentence)
+
+                    combined_scores.append(scores_json_sector)
+
+
+                num_entries = len(combined_scores)
+                for scores in combined_scores:
+                    for key in score_sums:
+                        score_sums[key] += scores[key]
+                
+                # Calculate average scores
+                average_scores = {key: score_sums[key] / num_entries for key in score_sums}
+
+                st.write("LLM Response : "+ input_text_list[docs])
+                st.write("Context Document : "+ reference_doc_list[docs])
+
+                table_html = """
+                <html>
+                <head>
+                    <style>
+                        .custom-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-family: Arial, sans-serif;
+                            margin: 20px 0;
+                        }
+                        .custom-table th, .custom-table td {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                            text-align: center;
+                        }
+                        .custom-table th {
+                            background-color: #f2f2f2;
+                            color: #333;
+                            font-weight: bold;
+                        }
+                        .custom-table tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                        }
+                        .custom-table tr:hover {
+                            background-color: #e6f7ff;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Without Sector</th>
+                                <th>With Sector</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                """
+
+                # Populate the table rows
+                for metric, without_sector_value in score_json_nosector.items():
+                    with_sector_value = scores_json_sector[metric]
+                    table_html += f"""
+                        <tr>
+                            <td>{metric}</td>
+                            <td>{without_sector_value:.4f}</td>
+                            <td>{with_sector_value:.4f}</td>
+                        </tr>
+                    """
+
+                # Close the HTML content
+                table_html += """
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+                """
+
+                # Display the styled HTML table
+                st.components.v1.html(table_html, height=400, scrolling=True)

@@ -104,7 +104,7 @@ def match_sentence(input_sentence, reference_sentences, max_window_size, use_sem
     return match_data
 
 
-def extract_similar_sentences(reference_document, input_text, max_window_size=2, use_semantic=False, combine_threshold=0.6, debug=False, search='sequential', clean_fn=None, embed_fn=None, lexical_algo=None):
+def extract_similar_sentences(reference_document, input_text, max_window_size=2, use_semantic=False, combine_threshold=0.6, debug=False, search='sequential', input_clean_fn=None, context_clean_fn=None, embed_fn=None, lexical_algo=None):
     """
     Extracts the most relevant sentences from the reference document by matching each input sentence to all combinations of reference sentences.
     
@@ -120,8 +120,8 @@ def extract_similar_sentences(reference_document, input_text, max_window_size=2,
     # Clean the input and reference text
     #reference_document = clean_text(reference_document)
     #input_text = clean_text(input_text)
-    reference_document = process_text(reference_document, clean_fn=clean_fn)
-    input_text = process_text(input_text, clean_fn=clean_fn)
+    reference_document = process_text(reference_document, clean_fn=context_clean_fn)
+    input_text = process_text(input_text, clean_fn=input_clean_fn)
 
     # Tokenize reference document into sentences
     reference_doc = nlp(reference_document)

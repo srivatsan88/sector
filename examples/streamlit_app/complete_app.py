@@ -143,7 +143,8 @@ if uploaded_file:
     lexical_algo = st.sidebar.selectbox("Lexical Algorithm", ["Sentcomp", "Keycomp"])
 
     # Optional parameters for clean_fn and embed_fn (set to None by default)
-    clean_fn = None
+    input_clean_fn = None
+    context_clean_fn = None
     embed_fn = None
     
 
@@ -174,7 +175,8 @@ if uploaded_file:
                     debug=False,
                     search=search_algorithm.lower(),
                     lexical_algo=lexical_algo.lower(),
-                    clean_fn=clean_fn,
+                    input_clean_fn=input_clean_fn,
+                    context_clean_fn=context_clean_fn,
                     embed_fn=embed_fn
                 )
 
@@ -394,7 +396,8 @@ if uploaded_file:
                 debug=False,
                 search=search_algorithm.lower(),  # Use value from sidebar
                 lexical_algo=lexical_algo.lower(),
-                clean_fn=None,
+                input_clean_fn=input_clean_fn,
+                context_clean_fn=context_clean_fn,
                 embed_fn=None
             )
 
@@ -460,7 +463,8 @@ if uploaded_file:
                     debug=False,
                     search=search_algorithm.lower(),  # Use value from sidebar
                     lexical_algo=lexical_algo.lower(),
-                    clean_fn=None,
+                    input_clean_fn=input_clean_fn,
+                    context_clean_fn=context_clean_fn,
                     embed_fn=None
                 )
                 for match in matched_sentences:
@@ -582,7 +586,8 @@ if uploaded_file:
                         debug=False,
                         search=search_algorithm.lower(),
                         lexical_algo=lexical_algo.lower() if lexical_algo else None,
-                        clean_fn=None,
+                        input_clean_fn=input_clean_fn,
+                        context_clean_fn=context_clean_fn,
                         embed_fn=None
                     )
 

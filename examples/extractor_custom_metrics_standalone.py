@@ -55,8 +55,8 @@ for docs in range(len(input_text_list)):
     for sentence in similar_sentences_json:
         input_sentence = sentence['input_sentence']
         reference_sentence = sentence['best_match']
-        print(input_sentence)
-        print(reference_sentence)
+        print("**LLM Response - "+input_sentence)
+        print("****Context Document - "+reference_doc_list[docs])
 
         scores_json = get_scores_as_json(reference_sentence, input_sentence)
 
@@ -73,3 +73,4 @@ for docs in range(len(input_text_list)):
 
     print("With Sector")
     print(json.dumps(scores_json, indent=4))
+    print("***************************************************")

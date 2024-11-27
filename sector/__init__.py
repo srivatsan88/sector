@@ -8,7 +8,7 @@ current_dir = os.path.dirname(__file__)
 
 # Loop over each file in the directory
 for filename in os.listdir(current_dir):
-    if filename.endswith(".py") and filename != "__init__.py":
+    if filename.endswith(".py") and (filename != "__init__.py" and filename != "auto_param_search.py"):
         module_name = filename[:-3]  # Strip .py extension
         module = importlib.import_module(f"sector.{module_name}")
 

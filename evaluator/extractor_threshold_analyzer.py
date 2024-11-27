@@ -30,7 +30,7 @@ positive_list = []
 negative_list = []
 
 for docs in range(len(input_text_list)):
-    print("=================== "+str(docs))
+    print("=================== Row "+str(docs))
 
     for reference in range(len(reference_doc_list)):
     # Extract similar sentences using either sliding window or semantic comparison
@@ -49,13 +49,15 @@ for docs in range(len(input_text_list)):
             probability = sentence['best_score']
 
             if docs == reference:
-                positive_list.append(probability)
+                positive_list.append(probability) #list containing score of matching scenario
             else:
-                negative_list.append(probability)
+                negative_list.append(probability) #list containing score of non matching documents
 
         #print(sentence)
 
+print("********** Positive Threshold **********")
 print(calculate_statistics(positive_list))
+print("********** Negative Threshold **********")
 print(calculate_statistics(negative_list))
 
 

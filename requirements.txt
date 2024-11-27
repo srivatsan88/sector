@@ -1,4 +1,4 @@
-urllib3==1.26.7
+urllib3>=1.26.19
 spacy==3.8.2
 nltk==3.9.1
 scikit-learn==1.5.2

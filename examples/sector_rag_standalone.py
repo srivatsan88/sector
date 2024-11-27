@@ -38,7 +38,8 @@ for docs in range(len(input_text_list)):
         top_n_aggregated=2,
         debug=False, 
         search='sequential',
-        clean_fn=None,
+        input_clean_fn=None,
+        context_clean_fn=None,
         embed_fn=None
     )
 

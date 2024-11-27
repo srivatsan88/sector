@@ -38,7 +38,8 @@ if st.button("Run Sector") and input_text and reference_text:
         top_n_aggregated=top_n_aggregated,
         debug=debug, 
         search=search,
-        clean_fn=None,
+        input_clean_fn=None,
+        context_clean_fn=None,
         embed_fn=None,
         lexical_algo=lexical_algo
     )

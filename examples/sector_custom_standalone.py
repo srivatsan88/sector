@@ -56,7 +56,8 @@ matched_sentences,final_score = run_sector(
     top_n_aggregated=2,
     debug=False, 
     search='sequential',
-    clean_fn=reformat_sections,
+    input_clean_fn=None,
+    context_clean_fn=reformat_sections,
     embed_fn=None
 )
 

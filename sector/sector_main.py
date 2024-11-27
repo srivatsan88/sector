@@ -58,7 +58,7 @@ def combine_scores(combined_scores, top_n=3):
 
     return combined_result
 
-def run_sector (input_text, reference_document,  max_window_size=2,  use_semantic=True, combine_threshold=0.85, top_n_individual=2, top_n_aggregated=2, debug=False, search='sequential', clean_fn=None, embed_fn=None, lexical_algo=None):
+def run_sector (input_text, reference_document,  max_window_size=2,  use_semantic=True, combine_threshold=0.85, top_n_individual=2, top_n_aggregated=2, debug=False, search='sequential', input_clean_fn=None, context_clean_fn=None, embed_fn=None, lexical_algo=None):
     similar_sentences_json = extract_similar_sentences(
     reference_document,
     input_text,  #LLM Response
@@ -67,7 +67,8 @@ def run_sector (input_text, reference_document,  max_window_size=2,  use_semanti
     combine_threshold=combine_threshold,  # Threshold for combining sentences
     debug=debug,
     search=search,
-    clean_fn=clean_fn,
+    input_clean_fn=input_clean_fn,
+    context_clean_fn=context_clean_fn,
     embed_fn=embed_fn,
     lexical_algo=lexical_algo #select algo when use_semantic is false. Options are sentcomp and keycomp
     )

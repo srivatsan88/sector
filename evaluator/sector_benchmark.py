@@ -117,3 +117,4 @@ for docs in range(len(input_text_list)):
 
     print("With Sector")
     print(json.dumps(scores_json, indent=4))
+    print("***************************************************")

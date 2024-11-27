@@ -66,7 +66,8 @@ matched_sentences, final_score = run_sector(
     top_n_aggregated=2,
     debug=False,
     search='ordered',
-    clean_fn=None,
+    input_clean_fn=None,
+    context_clean_fn=None,
     embed_fn=None,
     lexical_algo=None
 )
@@ -115,7 +116,8 @@ Fastest way to explore `Sector` is via streamlit app provided in examples direct
     - `top_n_aggregated`: Number of top aggregated match scores across sentences to compute final geometric mean.
     - `debug`: Enables debug mode if set to `True`.
     - `search`: Specifies the search strategy (e.g., 'sequential', 'ordered', 'random'). See below (Sector Search Strategy Combinations) for more details.
-    - `clean_fn`: Optional function for cleaning text. Custom pre-processing function to accomodate specific LLM response format out of prompting.
+    - `input_clean_fn`: Optional function for cleaning/pre-processing input or LLM Response text. Custom pre-processing function to accomodate specific LLM response format out of prompting.
+    - `context_clean_fn`: Optional function for cleaning/pre-processing context document. Custom pre-processing function to accomodate context document formats like json, pdf, markdown etc.
     - `embed_fn`: Optional function for custom embedding. Bring your own ebedding model for better extraction accuracy. Applicable when use_semantic is set to True.
     - `lexical_algo`: Optional parameter to set algo when use_semantic is False. Options inclide 'sentcomp' or 'keycomp'. Default is sentcomp. Sentcomp does sentence level match to pick relevant content while keycomp uses critical words to extract context.
   - **Returns**: A tuple containing matched sentences and a dictionary with scores.

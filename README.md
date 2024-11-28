@@ -122,6 +122,22 @@ Fastest way to explore `Sector` is via streamlit app provided in examples direct
     - `lexical_algo`: Optional parameter to set algo when use_semantic is False. Options inclide 'sentcomp' or 'keycomp'. Default is sentcomp. Sentcomp does sentence level match to pick relevant content while keycomp uses critical words to extract context.
   - **Returns**: A tuple containing matched sentences and a dictionary with scores.
 
+# Auto Parameter Search
+
+The **Parameter Search Program** simplifies finding optimal parameters for SECTOR by automating a search across key configurations like `max_window_size`, `combine_threshold`, `use_semantic`, `search_algorithm`, and ranking options (`top_n_individual`, `top_n_aggregated`). Choosing the right parameters is highly specific to the use case and can be challenging initially. This program accelerates the process by systematically exploring combinations to identify the best fit.
+
+## Features:
+- Accepts datasets via CSV or Excel.
+- Evaluates multiple parameter combinations that results in maximum performance for use cases.
+- Outputs the best parameters and saves detailed results for analysis.
+
+## Usage:
+1. Run the program:
+   ```bash
+   python sector.auto_param_search
+   ```
+2. Provide dataset path, number of rows to sample, optional max trials and input/reference columns.
+3. Review the best parameters and results in the terminal or saved CSV.
 
 ### Sector Search Strategy Combinations
 

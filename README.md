@@ -139,7 +139,7 @@ The **Parameter Search Program** simplifies finding optimal parameters for SECTO
 2. Provide dataset path, number of rows to sample, optional max trials and input/reference columns.
 3. Review the best parameters and results in the terminal or saved CSV.
 
-### Sector Search Strategy Combinations
+# Sector Search Strategy Combinations
 
 Sector supports three search strategies—**Sequential**, **Ordered**, and **Random**—which determine how sentence combinations are compared between input and reference texts. The total number of search space combinations (Complexities) varies based on the strategy and is calculated as follows:
 

@@ -1,0 +1,57 @@
+{
+    "affirmative_chain": [
+        ["allowed", "permitted", "authorized", "approved", "permissible", "acceptable"],
+        ["can use", "able to use", "feasible", "possible", "capable"],
+        ["available", "accessible", "open to", "enabled", "granted"],
+        ["certainly", "definitely", "always", "yes", "confirm", "affirm"],
+        ["recommended", "suggested", "encouraged", "endorsed", "validated"],
+        ["complies", "meets standards", "follows guidelines", "consistent with"],
+        ["part of", "included", "accepted", "suitable for", "compatible with"],
+        ["included", "present", "available", "accessible"]
+    ],
+    "negative_chain": [
+        ["not allowed", "disallowed", "not permitted", "not authorized", "unauthorized"],
+        ["excluded from", "are excluded", "is excluded", "not part of", "not included"],
+        ["cannot use", "cannot be used", "unable to use", "restricted from use"],
+        ["prohibited", "banned", "barred", "disallowed", "not permissible"],
+        ["unavailable", "inaccessible", "disabled", "blocked", "withheld"],
+        ["never", "no", "deny", "decline", "oppose", "reject"],
+        ["not recommended", "discouraged", "inadvisable", "contraindicated"],
+        ["violates", "does not comply", "against guidelines", "contrary to"],
+        ["unsuitable for", "inadmissible", "not compatible with", "inappropriate for"]
+    ],
+    "bias_check": [
+        ["stereotype", "prejudice", "discriminatory", "biased", "racist", "sexist", "xenophobic"],
+        ["all men", "all women", "every", "none", "always", "never"],
+        ["should be", "must be", "ought to", "have to", "typical of"],
+        ["inferior", "superior", "less capable", "more capable"],
+        ["gender roles", "cultural norms", "racial stereotypes", "class divides"]
+    ],
+    "toxic_check": [
+        ["stupid", "idiot", "dumb", "moron", "imbecile", "pathetic"],
+        ["worthless", "useless", "disgusting", "repulsive", "incompetent"],
+        ["annoying", "ignorant", "insulting", "mocking", "offensive"],
+        ["garbage", "trash", "loser", "horrible", "failure"]
+    ],
+    "hate_check": [
+        ["hate", "despise", "detest", "loathsome", "disdain"],
+        ["racist", "sexist", "homophobic", "transphobic", "bigoted"],
+        ["inferior race", "supremacist", "genocide", "eradicate"],
+        ["kill", "murder", "violence against", "eliminate", "exterminate"],
+        ["ethnic cleansing", "racial purity", "anti-Semitic", "Islamophobic"]
+    ],
+    "profanity_check": [
+        ["damn", "hell", "crap", "bastard", "bloody"],
+        ["fuck", "shit", "asshole", "dick", "bitch"],
+        ["piss", "prick", "slut", "whore", "cunt"],
+        ["motherfucker", "cock", "fucker", "balls", "screw"]
+    ],
+    "thresholds": {
+        "fuzzy_match_threshold": 80,
+        "similarity_score_threshold": 0.7
+    },
+    "other_properties": {
+        "language": "en",
+        "case_sensitive": false
+    }
+}

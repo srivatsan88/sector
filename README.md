@@ -126,12 +126,12 @@ Fastest way to explore `Sector` is via streamlit app provided in examples direct
 
 The **Parameter Search Program** simplifies finding optimal parameters for SECTOR by automating a search across key configurations like `max_window_size`, `combine_threshold`, `use_semantic`, `search_algorithm`, and ranking options (`top_n_individual`, `top_n_aggregated`). Choosing the right parameters is highly specific to the use case and can be challenging initially. This program accelerates the process by systematically exploring combinations to identify the best fit.
 
-## Features:
+### Features:
 - Accepts datasets via CSV or Excel.
 - Evaluates multiple parameter combinations that results in maximum performance for use cases.
 - Outputs the best parameters and saves detailed results for analysis.
 
-## Usage:
+### Usage:
 1. Run the program:
    ```bash
    python sector.auto_param_search

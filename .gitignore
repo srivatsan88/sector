@@ -23,5 +23,5 @@ build/
 
 #scratchpad local
 notes.txt
-sample.py
+sample*.py
 *.csv
